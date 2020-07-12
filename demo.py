@@ -42,7 +42,7 @@ for panel in panels:
     currentcoolingpoint = cstate.get("cooling_setpoint")
     coolingpoint = state.get("cooling_setpoint")
     if currentcoolingpoint != coolingpoint or currentheatingpoint != heatingpoint:
-        panel.set_carrier_state(cstate)
+        thermostat.set_carrier_state(cstate)
         state = thermostat.current_state()
 
 # This will likely now reflect the current state of the thermostat
