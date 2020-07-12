@@ -664,6 +664,28 @@ class VivintCloudSession(object):
             "GET", "%s/api/openid-configuration" % VIVINT_API_ENDPOINT)
         return json.loads(resp.data.decode()) if resp.status == 200 else None
 
+    def carrier_state(self):
+        resp = self.__pool.request(
+            method="GET",
+            url="http://localhost:8080/api/zone/1/config",
+            headers={"User-Agent": "vivint.py"})
+
+            if resp.status != 200:
+            raise Exception(
+                "Attempt to fetch the carrier config file resulted in non-200 response code",
+                resp.__dict__)
+
+        resp_body = json.loads(resp.data.decode())
+
+        return {
+                "fan_mode": resp_body["fanMode"],
+                "humidity": resp_body["currentHumidity"],
+                "temperature": resp_body["currentTemp"],
+                "mode": resp_body["mode"],
+                "cooling_setpoint": resp_body["coolSetpoint"],
+                "heating_setpoint": resp_body["heatSetpoint"]
+            }
+
     def __get_client_id(self):
         # Fetch the app.js, which has the OIDC client app ID baked in, so we can regex it out
         resp = self.__pool.request(
