@@ -306,6 +306,8 @@ class VivintCloudSession(object):
 
         def set_carrier_state(self, current_state):
             print("setting carrier state")
+            print("current state variables")
+            print(current_state)
             request_kwargs = dict(
                 method="PUT",
                 url="http://localhost:8080/api/zone/1/config",
