@@ -35,15 +35,16 @@ for panel in panels:
 
 
     #compare current state to saved state. if values are different than update carrier unit via api call
-    #cstate = thermostat.current_state()
-    #currentheatingpoint = cstate.get("heating_setpoint")
-    #heatingpoint = state.get("heating_setpoint")
+    while True:
+        cstate = thermostat.current_state()
+        currentheatingpoint = cstate.get("heating_setpoint")
+        heatingpoint = state.get("heating_setpoint")
 
-    #currentcoolingpoint = cstate.get("cooling_setpoint")
-    #coolingpoint = state.get("cooling_setpoint")
-    #if currentcoolingpoint != coolingpoint or currentheatingpoint != heatingpoint:
-    thermostat.set_carrier_state(state)
-    state = thermostat.current_state()
+        currentcoolingpoint = cstate.get("cooling_setpoint")
+        coolingpoint = state.get("cooling_setpoint")
+        if currentcoolingpoint != coolingpoint or currentheatingpoint != heatingpoint:
+            thermostat.set_carrier_state(state)
+            state = thermostat.current_state()
 
 # This will likely now reflect the current state of the thermostat
 print(thermostat.current_state())
