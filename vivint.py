@@ -312,7 +312,7 @@ class VivintCloudSession(object):
                 body=json.dumps({
                     "mode": current_state.get("mode"),
                     "fanMode": "auto",
-                    "hold": "true",
+                    "hold": True,
                     "heatSetpoint": int(current_state.get("heating_setpoint")),
                     "coolSetpoint": int(current_state.get("cooling_setpoint"))
                 }).encode("utf-8"),
