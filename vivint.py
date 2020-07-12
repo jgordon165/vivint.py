@@ -148,9 +148,6 @@ class VivintCloudSession(object):
                     "Authorization": "Bearer %s" % self.get_bearer_token()
                 })
 
-            print("raw response from api/systems")
-            print(resp.data.decode())
-
             return json.loads(resp.data.decode())
 
         def get_bearer_token(self):
@@ -308,6 +305,7 @@ class VivintCloudSession(object):
                     "Setting operation mode resulted in non-200 response")
 
         def set_carrier_state(self, current_state):
+            print("setting carrier state")
             request_kwargs = dict(
                 method="PUT",
                 url="http://localhost:8080/api/zone/1/config",
