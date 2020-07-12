@@ -310,6 +310,9 @@ class VivintCloudSession(object):
                 method="PUT",
                 url="http://localhost:8080/api/zone/1/config",
                 body=json.dumps({
+                    "mode": current_state.get("mode"),
+                    "fanMode": "auto",
+                    "hold": "true",
                     "heatSetpoint": str(current_state.get("heating_setpoint")),
                     "coolSetpoint": str(current_state.get("cooling_setpoint"))
                 }).encode("utf-8"),
