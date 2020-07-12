@@ -313,8 +313,8 @@ class VivintCloudSession(object):
                     "mode": "auto",
                     "fanMode": "auto",
                     "hold": "true",
-                    "heatSetpoint": current_state.heating_setpoint,
-                    "coolSetpoint": current_state.cooling_setpoint
+                    "heatSetpoint": current_state.get("heating_setpoint"),
+                    "coolSetpoint": current_state.get("cooling_setpoint")
                 }).encode("utf-8"),
                 headers={
                     "Content-Type":
