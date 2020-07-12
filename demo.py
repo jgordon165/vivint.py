@@ -35,9 +35,7 @@ for panel in panels:
 
     #compare current state to saved state. if values are different than update carrier unit via api call
     cstate = thermostat.current_state()
-    if cstate.humidity != state.humidity or 
-    cstate.cooling_setpoint != state.cooling_setpoint or 
-    cstate.heating_setpoint != state.heating_setpoint:
+    if cstate.humidity != state.humidity or cstate.cooling_setpoint != state.cooling_setpoint or cstate.heating_setpoint != state.heating_setpoint:
         panel.set_carrier_state(cstate)
         state = thermostat.current_state()
 
