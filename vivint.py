@@ -435,8 +435,9 @@ class VivintCloudSession(object):
             current = self._body["val"]
 
             #for fahrenheit use (temp * 1.8) + 32
-            hsp = (self._body["hsp"] * 1.8) + 32
-            csp = (self._body["csp"] * 1.8) + 32
+            #also make integers instead of floats
+            hsp = int((self._body["hsp"] * 1.8) + 32)
+            csp = int((self._body["csp"] * 1.8) + 32)
 
             if mode_id == 0:
                 setpoint = None
@@ -650,7 +651,7 @@ class VivintCloudSession(object):
         # Fetch the app.js, which has the OIDC client app ID baked in, so we can regex it out
         resp = self.__pool.request(
             method="GET",
-            url="https://www.vivintsky.com/app/scripts/app.jshi",
+            url="https://www.vivintsky.com/app/scripts/app.js",
             headers={"User-Agent": "vivint.py"})
 
         #if resp.status != 200:
