@@ -148,6 +148,9 @@ class VivintCloudSession(object):
                     "Authorization": "Bearer %s" % self.get_bearer_token()
                 })
 
+            print("raw response from api/systems")
+            print(resp.data.decode())
+
             return json.loads(resp.data.decode())
 
         def get_bearer_token(self):
@@ -645,7 +648,7 @@ class VivintCloudSession(object):
         # Fetch the app.js, which has the OIDC client app ID baked in, so we can regex it out
         resp = self.__pool.request(
             method="GET",
-            url="https://www.vivintsky.com/app/scripts/app.js",
+            url="https://www.vivintsky.com/app/scripts/app.jshi",
             headers={"User-Agent": "vivint.py"})
 
         #if resp.status != 200:
