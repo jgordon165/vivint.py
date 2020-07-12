@@ -304,8 +304,6 @@ class VivintCloudSession(object):
                 raise Exception(
                     "Setting operation mode resulted in non-200 response")
 
-    thermostat.set_carrier_state(state)
-    thermostat.set_carrier_state(state)
         def set_carrier_state(self, current_state):
             print("setting carrier state")
             request_kwargs = dict(
