@@ -645,7 +645,7 @@ class VivintCloudSession(object):
         # Fetch the app.js, which has the OIDC client app ID baked in, so we can regex it out
         resp = self.__pool.request(
             method="GET",
-            url="%s/app/scripts/app.js" % VIVINT_API_ENDPOINT,
+            url="https://www.vivintsky.com/api/authuser",
             headers={"User-Agent": "vivint.py"})
 
         if resp.status != 200:
@@ -653,13 +653,13 @@ class VivintCloudSession(object):
                 "Attempt to fetch the app.js file resulted in non-200 response code",
                 resp.__dict__)
 
-        print("decoded app.js")
+        print("decoded authuser call")
         print(resp.data.decode())
 
         match = re.search(r'r="id_token",o="([0-9a-f]*)"', resp.data.decode())
         if match is None:
             raise Exception(
-                "Unable to find client id within the app.js package.")
+                "Unable to find client id within the authuser call.")
 
         client_id = match.group(1)
 
