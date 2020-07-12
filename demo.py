@@ -45,3 +45,4 @@ for panel in panels:
         if currentcoolingpoint != coolingpoint or currentheatingpoint != heatingpoint:
             thermostat.set_carrier_state(state)
             state = thermostat.current_state()
+        time.sleep(200)
