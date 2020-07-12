@@ -315,7 +315,7 @@ class VivintCloudSession(object):
                     "hold": True,
                     "heatSetpoint": current_state.get("heating_setpoint"),
                     "coolSetpoint": current_state.get("cooling_setpoint")
-                })
+                }))
 
             print(request_kwargs)
 
