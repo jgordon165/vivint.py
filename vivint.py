@@ -310,9 +310,9 @@ class VivintCloudSession(object):
                 method="PUT",
                 url="http://localhost:8080/api/zone/1/config",
                 body=json.dumps({
-                    "mode": "auto",
+                    "mode": current_state.get("mode"),
                     "fanMode": "auto",
-                    "hold": True,
+                    "hold": "true",
                     "heatSetpoint": int(current_state.get("heating_setpoint")),
                     "coolSetpoint": int(current_state.get("cooling_setpoint"))
                 }).encode("utf-8"),
@@ -324,7 +324,7 @@ class VivintCloudSession(object):
             
             if resp.status != 200:
                 raise Exception(
-                    "Setting carrier state resulted in non-200 response: " % (resp.status))
+                    "Setting carrier state resulted in non-200 response: %s" % (resp.status))
 
         def set_fan_mode(self, mode):
             """
