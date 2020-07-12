@@ -309,7 +309,7 @@ class VivintCloudSession(object):
             request_kwargs = dict(
                 method="PUT",
                 url="http://localhost:8080/api/zone/1/config",
-                body="{{coolSetPoint: %}}" % current_state.get("cooling_setpoint"))
+                body=json.dumps({"coolSetPoint: %" % current_state.get("cooling_setpoint")}))
 
             print(request_kwargs)
 
