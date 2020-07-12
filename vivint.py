@@ -648,10 +648,10 @@ class VivintCloudSession(object):
             url="https://www.vivintsky.com/api/authuser",
             headers={"User-Agent": "vivint.py"})
 
-        if resp.status != 200:
-            raise Exception(
-                "Attempt to fetch the app.js file resulted in non-200 response code",
-                resp.__dict__)
+        #if resp.status != 200:
+         #   raise Exception(
+          #      "Attempt to fetch the app.js file resulted in non-200 response code",
+           #     resp.__dict__)
 
         match = re.search(r'r="client_id",o="([0-9a-f]*)"', resp.data.decode())
         if match is None:
