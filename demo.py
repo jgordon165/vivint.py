@@ -82,4 +82,4 @@ for panel in panels:
                 thermostat.set_temperature(None, cpoint, hpoint)
                 carrier_state = thermostat.carrier_state()
 
-        time.sleep(200)
+        time.sleep(60)
