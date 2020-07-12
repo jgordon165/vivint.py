@@ -325,10 +325,12 @@ class VivintCloudSession(object):
                     "Setting carrier state resulted in non-200 response: %s" % (resp.status))
 
         def carrier_state(self):
-            resp = self._pool.request(
+            request_kwargs = dict(
                 method="GET",
                 url="http://localhost:8080/api/zone/1/config",
                 headers={"User-Agent": "vivint.py"})
+            
+            resp = self._pool.request(**request_kwargs)
 
             if resp.status != 200:
                 raise Exception(
