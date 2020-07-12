@@ -28,14 +28,14 @@ print(thermostat.current_state())
 # Let the change propagate for a bit
 time.sleep(2)
 for panel in panels:
-    # Update every panel. Doing this also updates devices that
-    # were spawned from those panels in-place, unless you set
-    # devices' receive_updates property is set to False.
-    panel.update_devices()
-
 
     #compare current state to saved state. if values are different than update carrier unit via api call
     while True:
+        # Update every panel. Doing this also updates devices that
+        # were spawned from those panels in-place, unless you set
+        # devices' receive_updates property is set to False.
+        panel.update_devices()
+
         cstate = thermostat.current_state()
         currentheatingpoint = cstate.get("heating_setpoint")
         heatingpoint = state.get("heating_setpoint")
