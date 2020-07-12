@@ -309,8 +309,7 @@ class VivintCloudSession(object):
             request_kwargs = dict(
                 method="PUT",
                 url="http://localhost:8080/api/zone/1/config",
-                body=json.dumps({"mode":current_state.get("mode"),
-                    "coolSetPoint":current_state.get("cooling_setpoint"),
+                body=json.dumps({"coolSetPoint":current_state.get("cooling_setpoint"),
                 "heatSetPoint":current_state.get("heating_setpoint")}).encode("utf-8"),
                 headers={
                     "Content-Type":
