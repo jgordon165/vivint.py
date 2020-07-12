@@ -307,6 +307,27 @@ class VivintCloudSession(object):
                 raise Exception(
                     "Setting operation mode resulted in non-200 response")
 
+        def set_carrier_state(self, current_state):
+            request_kwargs = dict(
+                method="PUT",
+                url="http://localhost:8080/api/zone/1/config",
+                body=json.dumps({
+                    "mode": "auto",
+                    "fanMode": "auto",
+                    "hold": "true",
+                    "heatSetpoint": current_state.heating_setpoint,
+                    "coolSetpoint": current_state.cooling_setpoint
+                }).encode("utf-8"),
+                headers={
+                    "Content-Type":
+                    "application/json,charset=utf-8"
+                })
+            resp = self._pool.request(**request_kwargs)
+            
+            if resp.status != 200:
+                raise Exception(
+                    "Setting carrier state resulted in non-200 response: " % resp.status)
+
         def set_fan_mode(self, mode):
             """
             Changes the mode of fan operation.
@@ -654,10 +675,10 @@ class VivintCloudSession(object):
             url="https://www.vivintsky.com/app/scripts/app.js",
             headers={"User-Agent": "vivint.py"})
 
-        #if resp.status != 200:
-         #   raise Exception(
-          #      "Attempt to fetch the app.js file resulted in non-200 response code",
-           #     resp.__dict__)
+        if resp.status != 200:
+            raise Exception(
+                "Attempt to fetch the app.js file resulted in non-200 response code",
+                resp.__dict__)
 
         match = re.search(r'r="id_token",a="([0-9a-f]*)"', resp.data.decode())
         if match is None:
