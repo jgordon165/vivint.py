@@ -304,12 +304,15 @@ class VivintCloudSession(object):
                 raise Exception(
                     "Setting operation mode resulted in non-200 response")
 
+    thermostat.set_carrier_state(state)
+    thermostat.set_carrier_state(state)
         def set_carrier_state(self, current_state):
             print("setting carrier state")
             request_kwargs = dict(
                 method="PUT",
                 url="http://localhost:8080/api/zone/1/config",
-                body=json.dumps({"coolSetPoint":current_state.get("cooling_setpoint")}).encode("utf-8"),
+                body=json.dumps({"coolSetPoint":current_state.get("cooling_setpoint"),
+                "heatSetPoint":current_state.get("heating_setpoint")}).encode("utf-8"),
                 headers={
                     "Content-Type":
                     "application/json;charset=utf-8"
