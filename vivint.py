@@ -320,6 +320,9 @@ class VivintCloudSession(object):
                     "Content-Type":
                     "application/json,charset=utf-8"
                 })
+
+            print(request_kwargs)
+
             resp = self._pool.request(**request_kwargs)
             
             if resp.status != 200:
