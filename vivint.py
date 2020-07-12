@@ -315,10 +315,6 @@ class VivintCloudSession(object):
                     "hold": True,
                     "heatSetpoint": current_state.get("heating_setpoint"),
                     "coolSetpoint": current_state.get("cooling_setpoint")
-                }).encode("utf-8"),
-                headers={
-                    "Content-Type":
-                    "application/json,charset=utf-8"
                 })
 
             print(request_kwargs)
