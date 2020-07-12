@@ -670,7 +670,7 @@ class VivintCloudSession(object):
             url="http://localhost:8080/api/zone/1/config",
             headers={"User-Agent": "vivint.py"})
 
-            if resp.status != 200:
+        if resp.status != 200:
             raise Exception(
                 "Attempt to fetch the carrier config file resulted in non-200 response code",
                 resp.__dict__)
