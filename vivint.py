@@ -324,7 +324,7 @@ class VivintCloudSession(object):
                 raise Exception(
                     "Setting carrier state resulted in non-200 response: %s" % (resp.status))
 
-        def carrier_state(self):
+        def carrier_state(self, current_state):
             request_kwargs = dict(
                 method="GET",
                 url="http://localhost:8080/api/zone/1/config",
@@ -337,7 +337,12 @@ class VivintCloudSession(object):
                     "Attempt to fetch the carrier config file resulted in non-200 response code",
                     resp.__dict__)
 
-            resp_body = json.loads(resp.data.decode())
+            try:
+                resp_body = json.loads(resp.data.decode())
+            except:
+                return {
+                    current_state
+                }
 
             return {
                     "fan_mode": resp_body["fanMode"],

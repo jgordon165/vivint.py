@@ -58,7 +58,7 @@ for panel in panels:
 
 
         #set and compare carrier states
-        carriercstate = thermostat.carrier_state()
+        carriercstate = thermostat.carrier_state(carrier_state)
 
         currentheatingpoint = carriercstate.get("heating_setpoint")
         heatingpoint = carrier_state.get("heating_setpoint")
@@ -75,14 +75,14 @@ for panel in panels:
                 print("vivint panel changed, setting carrier state")
                 thermostat.set_carrier_state(cstate)
                 state = thermostat.current_state()
-                carrier_state = thermostat.carrier_state()
+                carrier_state = thermostat.carrier_state(carrier_state)
             else:
                 print("carrier panel changed, setting vivint state")
                 #vivint will need to be in celsius format(unfortunately)
                 cpoint = ((float(carriercstate.get("cooling_setpoint")) - 32) / 1.8)
                 hpoint = ((float(carriercstate.get("heating_setpoint")) - 32) / 1.8)
                 thermostat.set_temperature(None, cpoint, hpoint)
-                carrier_state = thermostat.carrier_state()
+                carrier_state = thermostat.carrier_state(carrier_state)
                 state = thermostat.current_state()
 
         #set initial state to use carrier value(whatever it may be)
@@ -90,7 +90,7 @@ for panel in panels:
             cpoint = ((float(carriercstate.get("cooling_setpoint")) - 32) / 1.8)
             hpoint = ((float(carriercstate.get("heating_setpoint")) - 32) / 1.8)
             thermostat.set_temperature(None, cpoint, hpoint)
-            carrier_state = thermostat.carrier_state()
+            carrier_state = thermostat.carrier_state(carrier_state)
             state = thermostat.current_state()
 
         initial_state = False
