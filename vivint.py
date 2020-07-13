@@ -311,11 +311,11 @@ class VivintCloudSession(object):
                 mode = "off"
 
             cool_active = "false"
-            if current_state.get("operation_mode") == "cool" and fan_mode == "auto":
+            if current_state.get("operation_mode") == "cool" and mode == "auto":
                 mode = "cool"
 
             heat_active = "false"
-            if current_state.get("operation_mode") == "heat" and fan_mode == "auto":
+            if current_state.get("operation_mode") == "heat" and mode == "auto":
                 mode = "heat"
 
             request_kwargs = dict(
@@ -504,8 +504,8 @@ class VivintCloudSession(object):
 
             #for fahrenheit use (temp * 1.8) + 32
             #also make integers instead of floats
-            hsp = int((self._body["hsp"] * 1.8) + 32)
-            csp = int((self._body["csp"] * 1.8) + 32)
+            hsp = int((abs(self._body["hsp"]) * 1.8) + 32)
+            csp = int((abs(self._body["csp"]) * 1.8) + 32)
 
             if mode_id == 0:
                 setpoint = None
