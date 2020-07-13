@@ -349,8 +349,7 @@ class VivintCloudSession(object):
                 operation_mode = "heat-cool"
 
             fan_mode = "always"
-            if resp_body["coolActive"] == "false" and 
-            resp_body["headActive"] == "false":
+            if resp_body["coolActive"] == "false" and resp_body["headActive"] == "false":
                 operation_mode = "off"
                 fan_mode = "off"
 
