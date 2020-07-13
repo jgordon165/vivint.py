@@ -56,7 +56,6 @@ for panel in panels:
         if currentcoolingpoint != coolingpoint or currentheatingpoint != heatingpoint:
             vivint_state_changed = True
 
-
         #set and compare carrier states
         carriercstate = thermostat.carrier_state(carrier_state)
 
@@ -68,6 +67,12 @@ for panel in panels:
 
         #carrier state changed
         if currentcoolingpoint != coolingpoint or currentheatingpoint != heatingpoint:
+            carrier_state_changed = True
+
+        if carriercstate.get("operation_mode") != carrier_state.get("operation_mode")
+            carrier_state_changed = True
+
+        if carriercstate.get("fan_mode") != carrier_state.get("fan_mode")
             carrier_state_changed = True
 
         if vivint_state_changed == True or carrier_state_changed == True:
