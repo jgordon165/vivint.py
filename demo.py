@@ -16,7 +16,7 @@ thermostat = panels[0].get_devices(device_type_set=[
 ])[0]
 
 state = thermostat.current_state()
-carrier_state = thermostat.carrier_state()
+carrier_state = thermostat.carrier_state(None)
 initial_state = True
 
 # Get the current state and print it out
