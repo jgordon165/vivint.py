@@ -344,11 +344,21 @@ class VivintCloudSession(object):
                     current_state
                 }
 
+            operation_mode = resp_body["mode"]
+            if resp_body["mode"] == "auto":
+                operation_mode = "heat-cool"
+
+            fan_mode = "always"
+            if resp_body["coolActive"] == "false" and 
+            resp_body["headActive"] == "false":
+                operation_mode = "off"
+                fan_mode = "off"
+
             return {
-                    "fan_mode": resp_body["fanMode"],
+                    "fan_mode": fan_mode,
                     "humidity": resp_body["currentHumidity"],
                     "temperature": resp_body["currentTemp"],
-                    "mode": resp_body["mode"],
+                    "operation_mode": operation_mode,
                     "cooling_setpoint": resp_body["coolSetpoint"],
                     "heating_setpoint": resp_body["heatSetpoint"]
                 }

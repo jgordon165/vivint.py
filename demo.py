@@ -82,6 +82,8 @@ for panel in panels:
                 cpoint = ((float(carriercstate.get("cooling_setpoint")) - 32) / 1.8)
                 hpoint = ((float(carriercstate.get("heating_setpoint")) - 32) / 1.8)
                 thermostat.set_temperature(None, cpoint, hpoint)
+                thermostat.set_operation_mode(carriercstate.get("operation_mode"))
+                thermostat.set_fan_mode(carriercstate.get("fan_mode"))
                 carrier_state = thermostat.carrier_state(carrier_state)
                 state = thermostat.current_state()
 
@@ -90,6 +92,8 @@ for panel in panels:
             cpoint = ((float(carriercstate.get("cooling_setpoint")) - 32) / 1.8)
             hpoint = ((float(carriercstate.get("heating_setpoint")) - 32) / 1.8)
             thermostat.set_temperature(None, cpoint, hpoint)
+            thermostat.set_operation_mode(carriercstate.get("operation_mode"))
+            thermostat.set_fan_mode(carriercstate.get("fan_mode"))
             carrier_state = thermostat.carrier_state(carrier_state)
             state = thermostat.current_state()
 
