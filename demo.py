@@ -17,6 +17,7 @@ thermostat = panels[0].get_devices(device_type_set=[
 
 state = thermostat.current_state()
 carrier_state = thermostat.carrier_state()
+initial_state = True
 
 # Get the current state and print it out
 print(state)
@@ -83,5 +84,15 @@ for panel in panels:
                 thermostat.set_temperature(None, cpoint, hpoint)
                 carrier_state = thermostat.carrier_state()
                 state = thermostat.current_state()
+
+        #set initial state to use carrier value(whatever it may be)
+        if initial_state == True:
+            cpoint = ((float(carriercstate.get("cooling_setpoint")) - 32) / 1.8)
+            hpoint = ((float(carriercstate.get("heating_setpoint")) - 32) / 1.8)
+            thermostat.set_temperature(None, cpoint, hpoint)
+            carrier_state = thermostat.carrier_state()
+            state = thermostat.current_state()
+
+        initial_state = False
 
         time.sleep(60)
