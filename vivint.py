@@ -316,7 +316,7 @@ class VivintCloudSession(object):
                 mode = "cool"
 
             heat_active = "false"
-            if current_state.get("operation_mode") == "heat" and fan_mode = "auto":
+            if current_state.get("operation_mode") == "heat" and fan_mode == "auto":
                 heat_active = "true"
                 mode = "heat"
 
