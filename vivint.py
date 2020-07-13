@@ -312,12 +312,10 @@ class VivintCloudSession(object):
 
             cool_active = "false"
             if current_state.get("operation_mode") == "cool" and fan_mode == "auto":
-                cool_active = "true"
                 mode = "cool"
 
             heat_active = "false"
             if current_state.get("operation_mode") == "heat" and fan_mode == "auto":
-                heat_active = "true"
                 mode = "heat"
 
             request_kwargs = dict(
@@ -325,7 +323,7 @@ class VivintCloudSession(object):
                 url="http://localhost:8080/api/zone/1/config",
                 body=json.dumps({"coolSetPoint":current_state.get("cooling_setpoint"),
                 "heatSetPoint":current_state.get("heating_setpoint"),
-                "mode":mode,"coolActive":cool_active,"heatActive":heat_active}).encode("utf-8"),
+                "mode":mode).encode("utf-8"),
                 headers={
                     "Content-Type":
                     "application/json;charset=utf-8"
