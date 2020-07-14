@@ -307,15 +307,15 @@ class VivintCloudSession(object):
         def set_carrier_state(self, current_state):
             print("setting carrier state")
             mode = "auto"
-            if current_state.get("fan_mode") == "off" or current_state.get("operation_mode") == "off":
+            if current_state.get("fan_mode") == "off" or current_state.get("mode") == "off":
                 mode = "off"
 
             cool_active = "false"
-            if current_state.get("operation_mode") == "cool" and mode == "auto":
+            if current_state.get("mode") == "cool" and mode == "auto":
                 mode = "cool"
 
             heat_active = "false"
-            if current_state.get("operation_mode") == "heat" and mode == "auto":
+            if current_state.get("mode") == "heat" and mode == "auto":
                 mode = "heat"
 
             request_kwargs = dict(
@@ -370,7 +370,7 @@ class VivintCloudSession(object):
                     "fan_mode": fan_mode,
                     "humidity": resp_body["currentHumidity"],
                     "temperature": resp_body["currentTemp"],
-                    "operation_mode": operation_mode,
+                    "mode": operation_mode,
                     "cooling_setpoint": resp_body["coolSetpoint"],
                     "heating_setpoint": resp_body["heatSetpoint"]
                 }

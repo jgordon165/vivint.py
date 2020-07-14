@@ -56,7 +56,7 @@ for panel in panels:
         if currentcoolingpoint != coolingpoint or currentheatingpoint != heatingpoint:
             vivint_state_changed = True
 
-        if cstate.get("operation_mode") != state.get("operation_mode"):
+        if cstate.get("mode") != state.get("mode"):
             vivint_state_changed = True
 
         if cstate.get("fan_mode") != state.get("fan_mode"):
@@ -75,7 +75,7 @@ for panel in panels:
         if currentcoolingpoint != coolingpoint or currentheatingpoint != heatingpoint:
             carrier_state_changed = True
 
-        if carriercstate.get("operation_mode") != carrier_state.get("operation_mode"):
+        if carriercstate.get("mode") != carrier_state.get("mode"):
             carrier_state_changed = True
 
         if carriercstate.get("fan_mode") != carrier_state.get("fan_mode"):
@@ -93,7 +93,7 @@ for panel in panels:
                 cpoint = ((float(carriercstate.get("cooling_setpoint")) - 32) / 1.8)
                 hpoint = ((float(carriercstate.get("heating_setpoint")) - 32) / 1.8)
                 thermostat.set_temperature(None, cpoint, hpoint)
-                thermostat.set_operation_mode(carriercstate.get("operation_mode"))
+                thermostat.set_operation_mode(carriercstate.get("mode"))
                 thermostat.set_fan_mode(carriercstate.get("fan_mode"))
                 carrier_state = thermostat.carrier_state(carrier_state)
                 state = thermostat.current_state()
@@ -103,7 +103,7 @@ for panel in panels:
             cpoint = ((float(carriercstate.get("cooling_setpoint")) - 32) / 1.8)
             hpoint = ((float(carriercstate.get("heating_setpoint")) - 32) / 1.8)
             thermostat.set_temperature(None, cpoint, hpoint)
-            thermostat.set_operation_mode(carriercstate.get("operation_mode"))
+            thermostat.set_operation_mode(carriercstate.get("mode"))
             thermostat.set_fan_mode(carriercstate.get("fan_mode"))
             carrier_state = thermostat.carrier_state(carrier_state)
             state = thermostat.current_state()
