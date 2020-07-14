@@ -504,8 +504,8 @@ class VivintCloudSession(object):
 
             #for fahrenheit use (temp * 1.8) + 32
             #also make integers instead of floats
-            hsp = int((abs(self._body["hsp"]) * 1.8) + 32)
-            csp = int((abs(self._body["csp"]) * 1.8) + 32)
+            hsp = int(abs((self._body["hsp"] * 1.8)) + 32)
+            csp = int(abs((self._body["csp"] * 1.8)) + 32)
 
             if mode_id == 0:
                 setpoint = None
