@@ -13,6 +13,14 @@ import base64
 import urllib3
 import argparse
 import threading
+import logging
+
+logger = logging.getLogger('vivint')
+hdlr = logging.FileHandler('/var/tmp/vivint.log')
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+hdlr.setFormatter(formatter)
+logger.addHandler(hdlr) 
+logger.setLevel(logging.WARNING)
 
 try:
     import certifi
@@ -352,7 +360,8 @@ class VivintCloudSession(object):
 
             try:
                 resp_body = json.loads(resp.data.decode())
-            except:
+            except Exception as e:
+                logger.error(e,'Houston, We have a problem')
                 return {
                     current_state
                 }
