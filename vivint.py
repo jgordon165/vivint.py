@@ -286,7 +286,9 @@ class VivintCloudSession(object):
             resp = self._pool.request(**request_kwargs)
 
             if resp.status != 200:
-                raise Exception("Setting state resulted in non-200 response")
+                logger.error("response failed: " % (resp.status))
+                logger.error("%s/api/systems/%d?includerules=false" %
+                (VIVINT_API_ENDPOINT, self.get_panel_root().id()))
 
         def set_operation_mode(self, mode):
             """
@@ -309,8 +311,9 @@ class VivintCloudSession(object):
             resp = self._pool.request(**request_kwargs)
 
             if resp.status != 200:
-                raise Exception(
-                    "Setting operation mode resulted in non-200 response")
+                logger.error("response failed: " % (resp.status))
+                logger.error("%s/api/%d/1/thermostats/%d" %
+                (VIVINT_API_ENDPOINT, self.get_panel_root().id(), self.id()))
 
         def set_carrier_state(self, current_state):
             print("setting carrier state")
@@ -342,8 +345,8 @@ class VivintCloudSession(object):
             resp = self._pool.request(**request_kwargs)
             
             if resp.status != 200:
-                raise Exception(
-                    "Setting carrier state resulted in non-200 response: %s" % (resp.status))
+                logger.error("response failed: " % (resp.status))
+                logger.error("PUT-http://localhost:8080/api/zone/1/config")
 
         def carrier_state(self, current_state):
             request_kwargs = dict(
@@ -354,9 +357,8 @@ class VivintCloudSession(object):
             resp = self._pool.request(**request_kwargs)
 
             if resp.status != 200:
-                raise Exception(
-                    "Attempt to fetch the carrier config file resulted in non-200 response code",
-                    resp.__dict__)
+                logger.error("response failed: " % (resp.status))
+                logger.error("GET-http://localhost:8080/api/zone/1/config")
 
             try:
                 resp_body = json.loads(resp.data.decode())
@@ -405,8 +407,9 @@ class VivintCloudSession(object):
             resp = self._pool.request(**request_kwargs)
 
             if resp.status != 200:
-                raise Exception(
-                    "Setting fan mode resulted in non-200 response")
+                logger.error("response failed: " % (resp.status))
+                logger.error("%s/api/%d/1/thermostats/%d" %
+                (VIVINT_API_ENDPOINT, self.get_panel_root().id(), self.id()))
 
         def set_temperature(self,
                             setpoint=None,
@@ -458,8 +461,9 @@ class VivintCloudSession(object):
             resp = self._pool.request(**request_kwargs)
 
             if resp.status != 200:
-                raise Exception(
-                    "Setting temperature resulted in non-200 response")
+                logger.error("response failed: " % (resp.status))
+                logger.error("%s/api/%d/1/thermostats/%d" %
+                (VIVINT_API_ENDPOINT, self.get_panel_root().id(), self.id()))
 
             # NOTE
             # This response may contain some suggestions, and a reasonable body.
@@ -695,9 +699,8 @@ class VivintCloudSession(object):
                 self.__auth_elements["state"] += new_auth_elements["state"]
                 self.__auth_elements["nonce"] += new_auth_elements["nonce"]
             else:
-                raise Exception(
-                    "Unable to refresh token with non-200 error, and no username/password available"
-                )
+                logger.error("response failed: " % (resp.status))
+                logger.error("Unable to refresh token with non-200 error, and no username/password available")
 
     def __parse_id_token(self, id_token=None):
         """
@@ -732,14 +735,12 @@ class VivintCloudSession(object):
             headers={"User-Agent": "vivint.py"})
 
         if resp.status != 200:
-            raise Exception(
-                "Attempt to fetch the app.js file resulted in non-200 response code",
-                resp.__dict__)
+            logger.error("response failed: " % (resp.status))
+            logger.error("Attempt to fetch the app.js file resulted in non-200 response code")
 
         match = re.search(r'r="id_token",a="([0-9a-f]*)"', resp.data.decode())
         if match is None:
-            raise Exception(
-                "Unable to find client id within the authuser call.")
+            logger.error("Unable to find client id within the authuser call.")
 
         client_id = match.group(1)
 
@@ -780,7 +781,7 @@ class VivintCloudSession(object):
             })
 
         if login_form_resp.headers.get("Set-Cookie", None) is None:
-            raise Exception("Unable to get Set-Cookie header from response")
+            logger.error("Unable to get Set-Cookie header from response")
 
         # The cookies returned by urllib3 when multiple Set-Cookie headers do NOT
         # work with the SimpleCookie class, without some preprocessing.
