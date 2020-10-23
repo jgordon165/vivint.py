@@ -82,6 +82,11 @@ for panel in panels:
         if carriercstate.get("fan_mode") != carrier_state.get("fan_mode"):
             carrier_state_changed = True
 
+        #we sometimes get some funky values from Carrier
+        #if mode can be determine, then just retain existing setting
+        if carrier_state.get("mode") == 'unknown':
+            carrier_state["mode"] = cstate.get("mode")
+
         if vivint_state_changed == True or carrier_state_changed == True:
             if vivint_state_changed == True:
                 print("vivint panel changed, setting carrier state")
