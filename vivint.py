@@ -294,6 +294,7 @@ class VivintCloudSession(object):
             """
             Changes the mode of operation.
             """
+            print("Set Operation Mode: {}".format(mode))
             request_kwargs = dict(
                 method="PUT",
                 url="%s/api/%d/1/thermostats/%d" %
