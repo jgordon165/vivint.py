@@ -515,6 +515,9 @@ class VivintCloudSession(object):
             mode_id = self._body["om"]
             current = self._body["val"]
 
+            if mode_id > 3:
+                mode_id = 3
+
             #for fahrenheit use (temp * 1.8) + 32
             #also make integers instead of floats
             hsp = int(abs((self._body["hsp"] * 1.8)) + 32)
