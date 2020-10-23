@@ -2,10 +2,11 @@
 
 import time
 import vivint
+from credentials import vivint_email, vivint_pwd
 
 # Set up the connection to the cloud session
-session = vivint.VivintCloudSession("john.smith@example.com",
-                                    "SuperSecretPassword")
+session = vivint.VivintCloudSession(vivint_email,
+                                    vivint_pwd)
 
 # List all panels (sites) that this user account has access to
 panels = session.get_panels()
