@@ -466,48 +466,6 @@ class VivintCloudSession(object):
                 logger.error("%s/api/%d/1/thermostats/%d" %
                 (VIVINT_API_ENDPOINT, self.get_panel_root().id(), self.id()))
 
-            # NOTE
-            # This response may contain some suggestions, and a reasonable body.
-            # Here's an example;
-            #
-            # {
-            #   "awareness_message": {
-            #     "pans": [
-            #       {
-            #         "l": "Yes",
-            #         "val": "yes"
-            #       },
-            #       {
-            #         "l": "No",
-            #         "val": "no"
-            #       }
-            #     ],
-            #     "stat": null,
-            #     "igt": "2018-05-27 17:16:16.739727",
-            #     "uid": "edf467e797842913f97b11bb",
-            #     "dest": "thermostats",
-            #     "ts": "2018-05-27 17:11:16.776699",
-            #     "plctx": {
-            #       "ctxid": "edf467e797842913f97b11bb",
-            #       "ctxt": 10,
-            #       "mid": "585c79932593243672c5d8a8",
-            #       "ts": "2018-05-27 17:11:16.778789+00:00",
-            #       "ctxd": {
-            #         "currentAutoMode": 2,
-            #         "_id": 33,
-            #         "csp": 23.5
-            #       }
-            #     },
-            #     "q": "Would you like to switch to Away mode?",
-            #     "did": 33,
-            #     "t": null,
-            #     "in": true,
-            #     "amtid": 4,
-            #     "_id": "585c79932593243672c5d8a8",
-            #     "panid": 42138025481253
-            #   }
-            # }
-
         def current_state(self):
             """
             Poll the thermostat endpoint to retrieve the temperature setpoints and
