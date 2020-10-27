@@ -361,13 +361,16 @@ class VivintCloudSession(object):
                 logger.error("response failed: " % (resp.status))
                 logger.error("GET-http://localhost:8080/api/zone/1/config")
 
+            print(resp)
+
+            if resp.data == None:
+                return current_state
+
             try:
                 resp_body = json.loads(resp.data.decode())
             except Exception as e:
                 logger.error(e,'Houston, We have a problem')
-                return {
-                    current_state
-                }
+                return current_state
 
             operation_mode = resp_body["mode"]
             if resp_body["mode"] == "auto":
