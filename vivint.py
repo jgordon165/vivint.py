@@ -363,7 +363,7 @@ class VivintCloudSession(object):
                 logger.error("response failed: " % (resp.status))
                 logger.error("GET-http://localhost:8080/api/zone/1/config")
 
-            print(resp)
+            print(resp.data)
 
             if resp.data == None:
                 return current_state
