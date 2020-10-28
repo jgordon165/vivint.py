@@ -182,8 +182,9 @@ class VivintCloudSession(object):
                 (d["_id"], d) for d in self.__system["system"]["par"][0]["d"]
             ])
 
+            print("devices")
             for device in device_list:
-                print("devices")
+                print("device:{}".format(device.id()))
                 print(device_dict[device.id()])
                 device.update_body(device_dict[device.id()])
 
