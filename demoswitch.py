@@ -59,13 +59,13 @@ while True:
 
         if state.get("name") == sensor_one_name:
             print(18000 - (state.get("activitytime") - sensor_one_state).total_seconds())
-            if ((18000 - state.get("activitytime") - sensor_one_state).total_seconds()) < motion_duration_in_seconds:
+            if (18000 - (state.get("activitytime") - sensor_one_state).total_seconds()) < motion_duration_in_seconds:
                 sensor_one_state = state.get("activitytime") 
                 sensor_one_state_changed = True
             else:
                 sensor_one_state_changed = False
         if state.get("name") == sensor_two_name:
-            if ((18000 - state.get("activitytime") - sensor_two_state).total_seconds()) < motion_duration_in_seconds:
+            if (18000 - (state.get("activitytime") - sensor_two_state).total_seconds()) < motion_duration_in_seconds:
                 sensor_two_state = state.get("activitytime")
                 sensor_two_state_changed = True
             else:
