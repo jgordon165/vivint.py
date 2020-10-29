@@ -63,9 +63,9 @@ while True:
             else:
                 sensor_two_state_changed = False
 
-    if sensor_one_state_changed == True and switch_one_state == "0":
+    if sensor_one_state_changed == True and switch_one_state == 0:
         switch_one.set_switch(switch_one_default_level)
-    if sensor_two_state_changed == True and switch_two_state == "0":
+    if sensor_two_state_changed == True and switch_two_state == 0:
         switch_two.set_switch(switch_two_default_level)
 
     time.sleep(2)
