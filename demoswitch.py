@@ -47,7 +47,7 @@ while True:
         if state.get("name") == sensor_one_name:
             sensor_one_state = state.get("active") 
             print("sensor 1")
-            print(sensor_one_name)
+            print(sensor_one_state)
         if state.get("name") == sensor_two_name:
             sensor_two_state = state.get("active")
             print("sensor 2")
