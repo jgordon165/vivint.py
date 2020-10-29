@@ -252,10 +252,10 @@ class VivintCloudSession(object):
 
     class MotionSensor(VivintDevice):
         def sensor_state(self):
-            active = self._body["mbs"]
+            active = self._body["ts"]
             name = self._body["n"]
             return {
-                "active":active,
+                "activitytime":active,
                 "name":name
             }
     class MutliSwitch(VivintDevice):

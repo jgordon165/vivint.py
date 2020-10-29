@@ -45,15 +45,25 @@ while True:
         state = sensor.sensor_state()
 
         if state.get("name") == sensor_one_name:
-            sensor_one_state = state.get("active") 
+            if sensor_one_state != state.get("activitytime"):
+                sensor_one_state = state.get("activitytime") 
+                sensor_one_state_changed = True
+            else:
+                sensor_one_state_changed = False
             print("sensor 1")
             print(sensor_one_state)
         if state.get("name") == sensor_two_name:
-            sensor_two_state = state.get("active")
+            if sensor_two_state != state.get("activitytime"):
+                sensor_two_state = state.get("activitytime")
+                sensor_two_state_changed = True
+            else:
+                sensor_two_state_changed = False
             print("sensor 2")
             print(sensor_two_state)
 
-    if sensor_one_state == True and switch_one_state == "0":
+    if sensor_one_state_changed == True and switch_one_state == "0":
         switch_one.set_switch(switch_one_default_level)
-    if sensor_two_state == True and switch_two_state == "0":
+    if sensor_two_state_changed == True and switch_two_state == "0":
         switch_two.set_switch(switch_two_default_level)
+
+    time.sleep(2)
