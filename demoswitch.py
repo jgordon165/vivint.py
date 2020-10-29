@@ -39,6 +39,8 @@ while True:
 
         if state.get("name") == switch_one_name:
             switch_one_state = state.get("val") 
+            print("switch_one_state")
+            print(switch_one_state)
             switch_one = multiswitch
         if state.get("name") == switch_two_name:
             switch_two_state = state.get("val")
@@ -49,23 +51,17 @@ while True:
         state = sensor.sensor_state()
 
         if state.get("name") == sensor_one_name:
-            print("activitytime")
-            print(state.get("activitytime"))
             if sensor_one_state != state.get("activitytime"):
                 sensor_one_state = state.get("activitytime") 
                 sensor_one_state_changed = True
             else:
                 sensor_one_state_changed = False
-            print("sensor 1")
-            print(sensor_one_state)
         if state.get("name") == sensor_two_name:
             if sensor_two_state != state.get("activitytime"):
                 sensor_two_state = state.get("activitytime")
                 sensor_two_state_changed = True
             else:
                 sensor_two_state_changed = False
-            print("sensor 2")
-            print(sensor_two_state)
 
     if sensor_one_state_changed == True and switch_one_state == "0":
         switch_one.set_switch(switch_one_default_level)
