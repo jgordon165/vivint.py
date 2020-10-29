@@ -29,10 +29,10 @@ for multiswitch in multiswitches:
     print("set arbitrary value to test light on these switches")
     print(state)
     multiswitch.set_switch(60)
-    multiswitch.set_switch(40)
     multiswitch.set_switch(20)
+    multiswitch.set_switch(40)
     multiswitch.set_switch(0)
-    
+
 state = thermostat.current_state()
 carrier_state = thermostat.carrier_state(None)
 initial_state = True
