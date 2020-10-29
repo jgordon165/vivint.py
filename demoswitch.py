@@ -45,7 +45,7 @@ while True:
 
     for multiswitch in multiswitches:
         state = multiswitch.multi_swtich_state()
-
+        print(state.get("name"))
         if state.get("name") == switch_one_name:
             switch_one_state = state.get("val")
             switch_one = multiswitch
