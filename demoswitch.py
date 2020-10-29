@@ -18,6 +18,8 @@ switch_two_name = "Dining Room Lights"
 switch_one_default_level = 20
 switch_two_default_level = 80
 
+motion_duration_in_seconds = 5
+
 sensor_one_name = "Living Room Motion Detector"
 sensor_two_name = "Dining Room Motion Detector"
 
@@ -51,13 +53,13 @@ while True:
         state = sensor.sensor_state()
 
         if state.get("name") == sensor_one_name:
-            if sensor_one_state != state.get("activitytime"):
+            if (state.get("activitytime") - sensor_one_state).total_seconds() < motion_duration_in_seconds:
                 sensor_one_state = state.get("activitytime") 
                 sensor_one_state_changed = True
             else:
                 sensor_one_state_changed = False
         if state.get("name") == sensor_two_name:
-            if sensor_two_state != state.get("activitytime"):
+            if (state.get("activitytime") - sensor_two_state).total_seconds() < motion_duration_in_seconds:
                 sensor_two_state = state.get("activitytime")
                 sensor_two_state_changed = True
             else:
