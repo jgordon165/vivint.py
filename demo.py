@@ -44,6 +44,7 @@ for panel in panels:
 
         # Now bolt the other context to the state, and write it out.
         print("set arbitrary value to test light on these switches")
+        print(state)
         state["val"] = 60
         state["val"] = 40
         state["val"] = 20
