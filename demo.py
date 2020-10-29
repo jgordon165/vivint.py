@@ -33,6 +33,25 @@ print(carrier_state)
 time.sleep(2)
 for panel in panels:
 
+    multiswitches = panel.get_devices(device_type_set=[
+        vivint.VivintCloudSession.VivintDevice.DEVICE_TYPE_LIGHT_MODULE
+    ])
+    for multiswitch in multiswitches:
+        __log(
+            "Getting state of multiswitch %d on panel %d" %
+            (multiswitch.id(), panel.id()), verbose)
+        state = multiswitch.current_state()
+
+        # Now bolt the other context to the state, and write it out.
+        print("set arbitrary value to test light on these switches")
+        state["val"] = 60
+        fp.write(json.dumps(state, sort_keys=True) + "\n")
+        fp.flush()
+
+        time.sleep(10)
+        state["val"] = 0
+        
+
     #compare current state to saved state. if values are different than update carrier unit via api call
     while True:
         # Update every panel. Doing this also updates devices that
