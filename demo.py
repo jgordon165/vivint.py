@@ -45,11 +45,11 @@ for panel in panels:
         # Now bolt the other context to the state, and write it out.
         print("set arbitrary value to test light on these switches")
         state["val"] = 60
+        state["val"] = 40
+        state["val"] = 20
+        state["val"] = 0
         fp.write(json.dumps(state, sort_keys=True) + "\n")
         fp.flush()
-
-        time.sleep(10)
-        state["val"] = 0
         
 
     #compare current state to saved state. if values are different than update carrier unit via api call
