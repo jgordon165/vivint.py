@@ -32,9 +32,7 @@ for multiswitch in multiswitches:
     multiswitch.set_switch(40)
     multiswitch.set_switch(20)
     multiswitch.set_switch(0)
-    fp.write(json.dumps(state, sort_keys=True) + "\n")
-    fp.flush()
-
+    
 state = thermostat.current_state()
 carrier_state = thermostat.carrier_state(None)
 initial_state = True
