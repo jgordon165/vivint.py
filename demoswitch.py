@@ -18,7 +18,7 @@ switch_two_name = "Dining Room Lights"
 switch_one_default_level = 20
 switch_two_default_level = 80
 
-motion_duration_in_seconds = 5
+motion_duration_in_seconds = 20
 
 sensor_one_inactivity_in_sec = 1200
 sensor_two_inactivity_in_sec = 60
@@ -101,4 +101,4 @@ while True:
             if switch_two_turn_off == True and switch_two_state != 0:
                 switch_two.set_switch(0)
 
-    time.sleep(2)
+    time.sleep(10)
