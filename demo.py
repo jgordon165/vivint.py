@@ -22,7 +22,7 @@ multiswitches = panels[0].get_devices(device_type_set=[
 for multiswitch in multiswitches:
     print(
         "Getting state of multiswitch %d on panel %d" %
-        (multiswitch.id(), panels[0].id()), verbose)
+        (multiswitch.id(), panels[0].id()))
     state = multiswitch.multi_swtich_state()
 
     # Now bolt the other context to the state, and write it out.
