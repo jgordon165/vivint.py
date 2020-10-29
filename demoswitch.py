@@ -58,6 +58,7 @@ while True:
         state = sensor.sensor_state()
 
         if state.get("name") == sensor_one_name:
+            print(state.get("activitytime") - sensor_one_state).total_seconds())
             if (state.get("activitytime") - sensor_one_state).total_seconds() < motion_duration_in_seconds:
                 sensor_one_state = state.get("activitytime") 
                 sensor_one_state_changed = True
