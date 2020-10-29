@@ -14,6 +14,7 @@ import urllib3
 import argparse
 import threading
 import logging
+import datetime
 
 logger = logging.getLogger('vivint')
 hdlr = logging.FileHandler('/var/tmp/vivint.log')
@@ -253,9 +254,10 @@ class VivintCloudSession(object):
     class MotionSensor(VivintDevice):
         def sensor_state(self):
             active = self._body["ts"]
+            time = datetime.datetime.strptime(active, '%Y-%m-%dT%H:%M:%S.%f')
             name = self._body["n"]
             return {
-                "activitytime":active,
+                "activitytime":time,
                 "name":name
             }
     class MutliSwitch(VivintDevice):
