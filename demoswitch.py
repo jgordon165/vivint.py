@@ -73,6 +73,14 @@ while True:
                 switch_one_turn_off = True
             else:
                 switch_one_turn_off = False
+            
+            #if motion is detected within motion_duration(typically 5 seconds), turn on light switch to default setting
+            if switch_one_turn_on == True and switch_one_state == 0:
+                switch_one.set_switch(switch_one_default_level)
+
+            #turn off light switch if sensor has been inactive for inactivity timeout
+            if switch_one_turn_off == True and switch_one_state != 0:
+                switch_one.set_switch(0)
         if state.get("name") == sensor_two_name:
             sensor_two_secs = (timestamp_conv_factor - (state.get("activitytime") - sensor_two_state).total_seconds())
             if sensor_two_secs < motion_duration_in_seconds:
@@ -86,16 +94,12 @@ while True:
             else:
                 switch_two_turn_off = False
 
-    #if motion is detected within motion_duration(typically 5 seconds), turn on light switch to default setting
-    if switch_one_turn_on == True and switch_one_state == 0:
-        switch_one.set_switch(switch_one_default_level)
-    if switch_two_turn_on == True and switch_two_state == 0:
-        switch_two.set_switch(switch_two_default_level)
+            #if motion is detected within motion_duration(typically 5 seconds), turn on light switch to default setting
+            if switch_two_turn_on == True and switch_two_state == 0:
+                switch_two.set_switch(switch_two_default_level)
 
-    #turn off light switch if sensor has been inactive for inactivity timeout
-    if switch_one_turn_off == True and switch_one_state != 0:
-        switch_one.set_switch(0)
-    if switch_two_turn_off == True and switch_two_state != 0:
-        switch_two.set_switch(0)
+            #turn off light switch if sensor has been inactive for inactivity timeout
+            if switch_two_turn_off == True and switch_two_state != 0:
+                switch_two.set_switch(0)
 
     time.sleep(2)
