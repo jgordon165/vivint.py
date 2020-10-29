@@ -255,7 +255,7 @@ class VivintCloudSession(object):
             active = self._body["v"]
             name = self._body["n"]
         return {
-            "active":active
+            "active":active,
             "name":name
         }
     class MutliSwitch(VivintDevice):
@@ -287,7 +287,7 @@ class VivintCloudSession(object):
             current = self._body["val"]
             name = self._body["n"]
             return {
-                "val":current
+                "val":current,
                 "name":name
             }
     class Thermostat(VivintDevice):
