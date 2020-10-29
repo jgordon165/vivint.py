@@ -254,10 +254,10 @@ class VivintCloudSession(object):
         def sensor_state(self):
             active = self._body["v"]
             name = self._body["n"]
-        return {
-            "active":active,
-            "name":name
-        }
+            return {
+                "active":active,
+                "name":name
+            }
     class MutliSwitch(VivintDevice):
         def set_switch(self, val):
             request_body = {
