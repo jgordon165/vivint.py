@@ -37,12 +37,10 @@ sensors = panels[0].get_devices(device_type_set=[
 ])
 
 while True:
-    for panel in panels:
-        # Update every panel. Doing this also updates devices that
-        # were spawned from those panels in-place, unless you set
-        # devices' receive_updates property is set to False.
-        panel.update_devices()
-        time.sleep(5)
+    # Update every panel. Doing this also updates devices that
+    # were spawned from those panels in-place, unless you set
+    # devices' receive_updates property is set to False.
+    panels[0].update_devices()
 
     for multiswitch in multiswitches:
         state = multiswitch.multi_swtich_state()
@@ -79,11 +77,13 @@ while True:
             if switch_one_turn_on == True and switch_one_state == 0:
                 switch_one.set_switch(switch_one_default_level)
                 time.sleep(30)
+                panels[0].update_devices()
 
             #turn off light switch if sensor has been inactive for inactivity timeout
             elif switch_one_turn_off == True and switch_one_state != 0:
                 switch_one.set_switch(0)
                 time.sleep(30)
+                panels[0].update_devices()
 
         if state.get("name") == sensor_two_name:
             print(switch_two_state)
@@ -105,10 +105,12 @@ while True:
             if switch_two_turn_on == True and switch_two_state == 0:
                 switch_two.set_switch(switch_two_default_level)
                 time.sleep(30)
+                panels[0].update_devices()
 
             #turn off light switch if sensor has been inactive for inactivity timeout
             elif switch_two_turn_off == True and switch_two_state != 0:
                 switch_two.set_switch(0)
                 time.sleep(30)
+                panels[0].update_devices()
 
     time.sleep(10)
