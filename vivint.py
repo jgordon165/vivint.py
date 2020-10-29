@@ -417,7 +417,30 @@ class VivintCloudSession(object):
                 logger.error("response failed: " % (resp.status))
                 logger.error("%s/api/%d/1/thermostats/%d" %
                 (VIVINT_API_ENDPOINT, self.get_panel_root().id(), self.id()))
+        def set_switch(self, val):
+            request_body = {
+                "_id": self.id(),
+                "val" : val
+            }
 
+            request_kwargs = dict(
+                method="PUT",
+                url="%s/api/%d/1/switches/%d" %
+                (VIVINT_API_ENDPOINT, self.get_panel_root().id(), self.id()),
+                body=json.dumps(request_body).encode("utf-8"),
+                headers={
+                    "Content-Type":
+                    "application/json;charset=utf-8",
+                    "Authorization":
+                    "Bearer %s" % self.get_panel_root().get_bearer_token()
+                })
+            resp = self._pool.request(**request_kwargs)
+
+            if resp.status != 200:
+                logger.error("response failed: " % (resp.status))
+                logger.error("%s/api/%d/1/switches/%d" %
+                (VIVINT_API_ENDPOINT, self.get_panel_root().id(), self.id()))
+                
         def set_temperature(self,
                             setpoint=None,
                             cool_setpoint=None,
@@ -472,6 +495,11 @@ class VivintCloudSession(object):
                 logger.error("%s/api/%d/1/thermostats/%d" %
                 (VIVINT_API_ENDPOINT, self.get_panel_root().id(), self.id()))
 
+        def multi_swtich_state(self):
+            current = self._body["val"]
+            return {
+                "val":current
+            }
         def current_state(self):
             """
             Poll the thermostat endpoint to retrieve the temperature setpoints and

@@ -40,15 +40,15 @@ for panel in panels:
         print(
             "Getting state of multiswitch %d on panel %d" %
             (multiswitch.id(), panel.id()), verbose)
-        state = multiswitch.current_state()
+        state = multiswitch.multi_swtich_state()
 
         # Now bolt the other context to the state, and write it out.
         print("set arbitrary value to test light on these switches")
         print(state)
-        state["val"] = 60
-        state["val"] = 40
-        state["val"] = 20
-        state["val"] = 0
+        multiswitch.set_switch(60)
+        multiswitch.set_switch(40)
+        multiswitch.set_switch(20)
+        multiswitch.set_switch(0)
         fp.write(json.dumps(state, sort_keys=True) + "\n")
         fp.flush()
         
