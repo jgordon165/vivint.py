@@ -15,8 +15,8 @@ panels = session.get_panels()
 switch_one_name = "Living Room Main Lights"
 switch_two_name = "Dining Room Lights"
 
-switch_one_default_level = "20"
-switch_two_default_level = "80"
+switch_one_default_level = 20
+switch_two_default_level = 80
 
 sensor_one_name = "Living Room Motion Detector"
 sensor_two_name = "Dining Room Motion Detector"
