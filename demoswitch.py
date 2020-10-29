@@ -19,7 +19,9 @@ switch_one_default_level = 20
 switch_two_default_level = 80
 
 motion_duration_in_seconds = 5
-motion_inactivity_in_seconds = 10
+
+sensor_one_inactivity_in_sec = 1200
+sensor_two_inactivity_in_sec = 60
 
 sensor_one_name = "Living Room Motion Detector"
 sensor_two_name = "Dining Room Motion Detector"
@@ -45,9 +47,7 @@ while True:
         state = multiswitch.multi_swtich_state()
 
         if state.get("name") == switch_one_name:
-            switch_one_state = state.get("val") 
-            print("switch_one_state")
-            print(switch_one_state)
+            switch_one_state = state.get("val")
             switch_one = multiswitch
         if state.get("name") == switch_two_name:
             switch_two_state = state.get("val")
@@ -62,14 +62,13 @@ while True:
 
         if state.get("name") == sensor_one_name:
             sensor_one_secs = (timestamp_conv_factor - (state.get("activitytime") - sensor_one_state).total_seconds())
-            print(sensor_one_secs)
             if sensor_one_secs < motion_duration_in_seconds:
                 sensor_one_state = state.get("activitytime") 
                 switch_one_turn_on = True
             else:
                 switch_one_turn_on = False
 
-            if sensor_one_secs > motion_inactivity_in_seconds:
+            if sensor_one_secs > sensor_one_inactivity_in_sec:
                 switch_one_turn_off = True
             else:
                 switch_one_turn_off = False
@@ -89,7 +88,7 @@ while True:
             else:
                 switch_two_turn_on = False
 
-            if sensor_two_secs > motion_inactivity_in_seconds:
+            if sensor_two_secs > sensor_two_inactivity_in_sec:
                 switch_two_turn_off = True
             else:
                 switch_two_turn_off = False
