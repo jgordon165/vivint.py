@@ -84,6 +84,7 @@ while True:
                 switch_one.set_switch(0)
 
         if state.get("name") == sensor_two_name:
+            print(switch_two_state)
             sensor_two_secs = (timestamp_conv_factor - (state.get("activitytime") - sensor_two_state).total_seconds())
             if sensor_two_secs < motion_duration_in_seconds:
                 sensor_two_state = state.get("activitytime")
