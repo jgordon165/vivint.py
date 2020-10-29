@@ -78,6 +78,11 @@ while True:
             else:
                 switch_two_turn_on = False
 
+            if totalseconds > motion_inactivity_in_seconds:
+                switch_two_turn_off = True
+            else:
+                switch_two_turn_off = False
+
     #if motion is detected within motion_duration(typically 5 seconds), turn on light switch to default setting
     if switch_one_turn_on == True and switch_one_state == 0:
         switch_one.set_switch(switch_one_default_level)
