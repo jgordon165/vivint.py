@@ -252,7 +252,7 @@ class VivintCloudSession(object):
 
     class MotionSensor(VivintDevice):
         def sensor_state(self):
-            active = self._body["ea"]
+            active = self._body["mbs"]
             name = self._body["n"]
             return {
                 "active":active,
