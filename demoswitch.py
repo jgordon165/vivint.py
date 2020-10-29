@@ -24,6 +24,8 @@ motion_inactivity_in_seconds = 10
 sensor_one_name = "Living Room Motion Detector"
 sensor_two_name = "Dining Room Motion Detector"
 
+timestamp_conv_factor = 18000
+
 multiswitches = panels[0].get_devices(device_type_set=[
     vivint.VivintCloudSession.VivintDevice.DEVICE_TYPE_LIGHT_MODULE
 ])
@@ -59,27 +61,27 @@ while True:
         state = sensor.sensor_state()
 
         if state.get("name") == sensor_one_name:
-            totalseconds = (18000 - (state.get("activitytime") - sensor_one_state).total_seconds())
-            print(totalseconds)
-            if totalseconds < motion_duration_in_seconds:
+            sensor_one_secs = (timestamp_conv_factor - (state.get("activitytime") - sensor_one_state).total_seconds())
+            print(sensor_one_secs)
+            if sensor_one_secs < motion_duration_in_seconds:
                 sensor_one_state = state.get("activitytime") 
                 switch_one_turn_on = True
             else:
                 switch_one_turn_on = False
 
-            if totalseconds > motion_inactivity_in_seconds:
+            if sensor_one_secs > motion_inactivity_in_seconds:
                 switch_one_turn_off = True
             else:
                 switch_one_turn_off = False
         if state.get("name") == sensor_two_name:
-            totalseconds = (18000 - (state.get("activitytime") - sensor_two_state).total_seconds())
-            if totalseconds < motion_duration_in_seconds:
+            sensor_two_secs = (timestamp_conv_factor - (state.get("activitytime") - sensor_two_state).total_seconds())
+            if sensor_two_secs < motion_duration_in_seconds:
                 sensor_two_state = state.get("activitytime")
                 switch_two_turn_on = True
             else:
                 switch_two_turn_on = False
 
-            if totalseconds > motion_inactivity_in_seconds:
+            if sensor_two_secs > motion_inactivity_in_seconds:
                 switch_two_turn_off = True
             else:
                 switch_two_turn_off = False
