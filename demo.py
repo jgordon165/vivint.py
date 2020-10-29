@@ -37,7 +37,7 @@ for panel in panels:
         vivint.VivintCloudSession.VivintDevice.DEVICE_TYPE_LIGHT_MODULE
     ])
     for multiswitch in multiswitches:
-        __log(
+        print(
             "Getting state of multiswitch %d on panel %d" %
             (multiswitch.id(), panel.id()), verbose)
         state = multiswitch.current_state()
