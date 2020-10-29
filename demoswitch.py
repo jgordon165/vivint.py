@@ -42,6 +42,7 @@ while True:
         # were spawned from those panels in-place, unless you set
         # devices' receive_updates property is set to False.
         panel.update_devices()
+        time.sleep(5)
 
     for multiswitch in multiswitches:
         state = multiswitch.multi_swtich_state()
