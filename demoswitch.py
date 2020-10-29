@@ -35,6 +35,11 @@ sensors = panels[0].get_devices(device_type_set=[
 ])
 
 while True:
+    for panel in panels:
+        # Update every panel. Doing this also updates devices that
+        # were spawned from those panels in-place, unless you set
+        # devices' receive_updates property is set to False.
+        panel.update_devices()
 
     for multiswitch in multiswitches:
         state = multiswitch.multi_swtich_state()
