@@ -77,13 +77,11 @@ while True:
             if switch_one_turn_on == True and switch_one_state == 0:
                 switch_one.set_switch(switch_one_default_level)
                 time.sleep(30)
-                panels[0].update_devices()
 
             #turn off light switch if sensor has been inactive for inactivity timeout
             elif switch_one_turn_off == True and switch_one_state != 0:
                 switch_one.set_switch(0)
                 time.sleep(30)
-                panels[0].update_devices()
 
         if state.get("name") == sensor_two_name:
             print(switch_two_state)
@@ -105,12 +103,10 @@ while True:
             if switch_two_turn_on == True and switch_two_state == 0:
                 switch_two.set_switch(switch_two_default_level)
                 time.sleep(30)
-                panels[0].update_devices()
 
             #turn off light switch if sensor has been inactive for inactivity timeout
             elif switch_two_turn_off == True and switch_two_state != 0:
                 switch_two.set_switch(0)
                 time.sleep(30)
-                panels[0].update_devices()
 
     time.sleep(10)

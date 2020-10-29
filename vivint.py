@@ -281,6 +281,8 @@ class VivintCloudSession(object):
                 logger.error("response failed: " % (resp.status))
                 logger.error("%s/api/%d/1/switches/%d" %
                 (VIVINT_API_ENDPOINT, self.get_panel_root().id(), self.id()))
+            else:
+                self._body["val"] = val
 
         def multi_swtich_state(self):
             current = self._body["val"]
