@@ -49,6 +49,8 @@ while True:
         state = sensor.sensor_state()
 
         if state.get("name") == sensor_one_name:
+            print("activitytime")
+            print(state.get("activitytime"))
             if sensor_one_state != state.get("activitytime"):
                 sensor_one_state = state.get("activitytime") 
                 sensor_one_state_changed = True
