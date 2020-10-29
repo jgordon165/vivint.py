@@ -72,7 +72,8 @@ while True:
             else:
                 switch_one_turn_off = False
         if state.get("name") == sensor_two_name:
-            if (18000 - (state.get("activitytime") - sensor_two_state).total_seconds()) < motion_duration_in_seconds:
+            totalseconds = (18000 - (state.get("activitytime") - sensor_two_state).total_seconds())
+            if totalseconds < motion_duration_in_seconds:
                 sensor_two_state = state.get("activitytime")
                 switch_two_turn_on = True
             else:
