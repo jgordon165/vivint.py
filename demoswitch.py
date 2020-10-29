@@ -1,5 +1,3 @@
-
-
 import time
 import vivint
 from credentials import vivint_email, vivint_pwd

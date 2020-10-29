@@ -89,6 +89,9 @@ class VivintCloudSession(object):
         # This specifically is the multi-level light module.
         DEVICE_TYPE_LIGHT_MODULE = "multilevel_switch_device"
 
+        # Represents wireless sensors like door sensors but also hard wired motion detectors
+        DEVICE_TYPE_MOTION_SENSOR = "wireless_sensor"
+
         def __init__(self, body, panel_root):
             self._body = body
             self.__panel_root = panel_root
@@ -130,7 +133,9 @@ class VivintCloudSession(object):
                 VivintCloudSession.VivintDevice.DEVICE_TYPE_THERMOSTAT:
                 VivintCloudSession.Thermostat,
                 VivintCloudSession.VivintDevice.DEVICE_TYPE_LIGHT_MODULE:
-                VivintCloudSession.MutliSwitch
+                VivintCloudSession.MutliSwitch,
+                VivintCloudSession.VivintDevice.DEVICE_TYPE_MOTION_SENSOR:
+                VivintCloudSession.MotionSensor
             }
             return mapping.get(type_string, VivintCloudSession.UnknownDevice)
 
@@ -245,6 +250,14 @@ class VivintCloudSession(object):
         def __init__(self, body, panel_root):
             super().__init__(body, panel_root)
 
+    class MotionSensor(VivintDevice):
+        def sensor_state(self):
+            active = self._body["v"]
+            name = self._body["n"]
+        return {
+            "active":active
+            "name":name
+        }
     class MutliSwitch(VivintDevice):
         def set_switch(self, val):
             request_body = {
@@ -272,8 +285,10 @@ class VivintCloudSession(object):
 
         def multi_swtich_state(self):
             current = self._body["val"]
+            name = self._body["n"]
             return {
                 "val":current
+                "name":name
             }
     class Thermostat(VivintDevice):
         """
