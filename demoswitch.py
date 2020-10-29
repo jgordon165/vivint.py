@@ -23,9 +23,6 @@ motion_duration_in_seconds = 5
 sensor_one_name = "Living Room Motion Detector"
 sensor_two_name = "Dining Room Motion Detector"
 
-sensor_one_state = datetime.now()
-sensor_two_state = datetime.now()
-
 multiswitches = panels[0].get_devices(device_type_set=[
     vivint.VivintCloudSession.VivintDevice.DEVICE_TYPE_LIGHT_MODULE
 ])
@@ -53,7 +50,10 @@ while True:
             switch_two_state = state.get("val")
             switch_two = multiswitch
 
-    
+    #reset time state
+    sensor_one_state = datetime.now()
+    sensor_two_state = datetime.now()
+
     for sensor in sensors:
         state = sensor.sensor_state()
 
