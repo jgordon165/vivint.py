@@ -19,6 +19,7 @@ switch_one_default_level = 20
 switch_two_default_level = 80
 
 motion_duration_in_seconds = 5
+motion_inactivity_in_seconds = 10
 
 sensor_one_name = "Living Room Motion Detector"
 sensor_two_name = "Dining Room Motion Detector"
@@ -58,12 +59,18 @@ while True:
         state = sensor.sensor_state()
 
         if state.get("name") == sensor_one_name:
-            print(18000 - (state.get("activitytime") - sensor_one_state).total_seconds())
-            if (18000 - (state.get("activitytime") - sensor_one_state).total_seconds()) < motion_duration_in_seconds:
+            totalseconds = (18000 - (state.get("activitytime") - sensor_one_state).total_seconds())
+            print(totalseconds)
+            if totalseconds < motion_duration_in_seconds:
                 sensor_one_state = state.get("activitytime") 
                 switch_one_turn_on = True
             else:
                 switch_one_turn_on = False
+
+            if totalseconds > motion_inactivity_in_seconds:
+                switch_one_turn_off = True
+            else:
+                switch_one_turn_off = False
         if state.get("name") == sensor_two_name:
             if (18000 - (state.get("activitytime") - sensor_two_state).total_seconds()) < motion_duration_in_seconds:
                 sensor_two_state = state.get("activitytime")
@@ -71,9 +78,16 @@ while True:
             else:
                 switch_two_turn_on = False
 
+    #if motion is detected within motion_duration(typically 5 seconds), turn on light switch to default setting
     if switch_one_turn_on == True and switch_one_state == 0:
         switch_one.set_switch(switch_one_default_level)
     if switch_two_turn_on == True and switch_two_state == 0:
         switch_two.set_switch(switch_two_default_level)
+
+    #turn off light switch if sensor has been inactive for inactivity timeout
+    if switch_one_turn_off == True and switch_one_state != 0:
+        switch_one.set_switch(0)
+    if switch_two_turn_off == True and switch_two_state != 0:
+        switch_two.set_switch(0)
 
     time.sleep(2)
