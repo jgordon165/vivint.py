@@ -128,7 +128,7 @@ class VivintCloudSession(object):
         def get_class(type_string):
             mapping = {
                 VivintCloudSession.VivintDevice.DEVICE_TYPE_THERMOSTAT:
-                VivintCloudSession.Thermostat
+                VivintCloudSession.Thermostat,
                 VivintCloudSession.VivintDevice.DEVICE_TYPE_LIGHT_MODULE:
                 VivintCloudSession.MutliSwitch
             }
