@@ -20,7 +20,7 @@ switch_two_default_level = 80
 
 motion_duration_in_seconds = 5
 
-sensor_one_inactivity_in_sec = 1200
+sensor_one_inactivity_in_sec = 600
 sensor_two_inactivity_in_sec = 60
 
 sensor_one_name = "Living Room Motion Detector"
