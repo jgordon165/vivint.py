@@ -18,7 +18,7 @@ import threading
 
 from urllib.parse import urlencode, unquote, quote, quote_plus
 
-# this is currently hosting locally on the same instance as your vivin.py project, but
+# this is currently hosted locally on the same instance as your vivint.py project, but
 # you could use a dns forwarder like NGRK to host these on separate instances
 CARRIER_API_ENDPOINT = "http://localhost:8080"
 
