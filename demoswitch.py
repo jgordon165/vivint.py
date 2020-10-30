@@ -59,7 +59,7 @@ while True:
         state = sensor.sensor_state()
 
         if state.get("name") == sensor_one_name:
-            sensor_one_secs = (sensor_one_state - (state.get("activitytime")).total_seconds())
+            sensor_one_secs = ((sensor_one_state - state.get("activitytime")).total_seconds())
             if sensor_one_secs < motion_duration_in_seconds:
                 sensor_one_state = state.get("activitytime") 
                 switch_one_turn_on = True
@@ -89,7 +89,7 @@ while True:
 
         if state.get("name") == sensor_two_name:
             print(switch_two_state)
-            sensor_two_secs = (sensor_two_state - (state.get("activitytime")).total_seconds())
+            sensor_two_secs = ((sensor_two_state - state.get("activitytime")).total_seconds())
             if sensor_two_secs < motion_duration_in_seconds:
                 sensor_two_state = state.get("activitytime")
                 switch_two_turn_on = True
