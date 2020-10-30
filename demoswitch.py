@@ -54,6 +54,7 @@ while True:
     #reset time state
     sensor_one_state = datetime.now()
     sensor_two_state = datetime.now()
+    print(sensor_one_state)
 
     for sensor in sensors:
         state = sensor.sensor_state()
@@ -62,6 +63,7 @@ while True:
             sensor_one_secs = (timestamp_conv_factor - (state.get("activitytime") - sensor_one_state).total_seconds())
             if sensor_one_secs < motion_duration_in_seconds:
                 sensor_one_state = state.get("activitytime") 
+                print(sensor_one_state)
                 switch_one_turn_on = True
                 print("sensor one sec: {}".format(sensor_one_secs))
             else:
