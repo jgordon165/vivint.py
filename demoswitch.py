@@ -60,7 +60,7 @@ while True:
         state = sensor.sensor_state()
 
         if state.get("name") == sensor_one_name:
-            sensor_one_secs = (timestamp_conv_factor - (state.get("activitytime") - sensor_one_state).total_seconds())
+            sensor_one_secs = ((state.get("activitytime") - sensor_one_state).total_seconds())
             if sensor_one_secs < motion_duration_in_seconds:
                 sensor_one_state = state.get("activitytime") 
                 print(sensor_one_state)
